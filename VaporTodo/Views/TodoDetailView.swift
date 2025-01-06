@@ -13,15 +13,16 @@ struct TodoDetailView: View {
     var body: some View {
       Text(todo.title)
       Text("Due Date")
-      Text(todo.dueDate, format: Date.FormatStyle(date: .numeric, time: .standard))
+//      Text(todo.dueDate, format: Date.FormatStyle(date: .numeric, time: .standard))
       Text("\(todo.priority)")
       Text("\(todo.isCompleted)")
       Text("Timestamp")
-      Text(todo.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+//      Text(todo.createdAt, format: Date.FormatStyle(date: .numeric, time: .standard))
 
     }
 }
 
 #Preview {
+//  TodoDetailView(todo: TodoItem.mockData.first!)
   TodoDetailView(todo: TodoItem.mockData.first!)
 }
