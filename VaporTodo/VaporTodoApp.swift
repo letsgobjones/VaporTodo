@@ -12,7 +12,7 @@ import SwiftData
 struct VaporTodoApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            TodoItem.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -24,9 +24,11 @@ struct VaporTodoApp: App {
     }()
 
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+      WindowGroup {
+        NavigationStack {
+          ContentView()
         }
         .modelContainer(sharedModelContainer)
+      }
     }
 }
