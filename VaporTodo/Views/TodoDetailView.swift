@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct TodoDetailView: View {
+  var todo: TodoItem
+  
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+      Text(todo.title)
+      Text("Due Date")
+      Text(todo.dueDate, format: Date.FormatStyle(date: .numeric, time: .standard))
+      Text("\(todo.priority)")
+      Text("\(todo.isCompleted)")
+      Text("Timestamp")
+      Text(todo.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+
     }
 }
 
 #Preview {
-    TodoDetailView()
+  TodoDetailView(todo: TodoItem.mockData.first!)
 }
