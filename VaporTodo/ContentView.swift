@@ -13,7 +13,7 @@ struct ContentView: View {
     @Query private var todo: [TodoItem]
 
   @State var title: String = ""
-@State var dueDate: Date?
+  @State var dueDate: Date = Date().addingTimeInterval(604800)
   @State var isCompleted: Bool = false
   @State var priority: Int = 0
     var body: some View {
@@ -32,9 +32,17 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                  NavigationLink(destination: AddTodoView()) {
+                    Label("Add Item", systemImage: "plus")
+                  }
+                  
+                  
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+                  
+                  
+                  
                 }
             }
         
@@ -42,7 +50,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = TodoItem(title: title, isCompleted: isCompleted, dueDate: dueDate, priority: priority,timestamp: Date())
+          let newItem = TodoItem(title: title, isCompleted: isCompleted, dueDate: dueDate, priority: priority,timestamp: Date())
             modelContext.insert(newItem)
         }
     }
@@ -59,6 +67,8 @@ struct ContentView: View {
 #Preview {
   NavigationStack {
     ContentView()
-      .modelContainer(for: TodoItem.self, inMemory: true)
+    //      .modelContainer(for: TodoItem.self, inMemory: true)
   }
+  .modelContainer(PreviewContainer.shared)
+  
 }
