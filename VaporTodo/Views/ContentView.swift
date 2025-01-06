@@ -20,9 +20,12 @@ struct ContentView: View {
             List {
                 ForEach(todo) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+//                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                      
+                      TodoDetailView(todo: item)
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+//                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                      Text(item.title)
                     }
                 }
                 .onDelete(perform: deleteItems)
