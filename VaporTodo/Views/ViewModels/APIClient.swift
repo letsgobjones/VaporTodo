@@ -74,5 +74,18 @@ struct APIClient {
   
   
 
-    // ... add other methods for creating, updating, deleting todos
+  func deleteTodo(withID id: UUID) async throws {
+          guard let url = URL(string: "todos/\(id)", relativeTo: baseURL) else {
+              throw APIError.invalidURL
+          }
+
+          var request = URLRequest(url: url)
+          request.httpMethod = "DELETE"
+
+          let (_, response) = try await URLSession.shared.data(for: request)
+
+          guard let response = response as? HTTPURLResponse, response.statusCode == 204 else { // 204 No Content for successful delete
+              throw APIError.requestFailed
+          }
+      }
 }
