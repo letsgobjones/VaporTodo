@@ -34,11 +34,22 @@ class TodoStore: ObservableObject {
       }
   
   
-    func deleteTodo(at offsets: IndexSet) {
-        // Implement logic to delete todos from the server using apiClient
-        // and update the todos array
-    }
-  
+  func deleteTodo(at offsets: IndexSet) {
+         for index in offsets {
+             let todoToDelete = todos[index]
+             Task {
+                 do {
+                     try await apiClient.deleteTodo(withID: todoToDelete.id) // Call the delete API
+                     await MainActor.run { // Update the UI on the main thread
+                         todos.remove(at: index)
+                     }
+                 } catch {
+                     print("Error deleting todo: \(error)")
+                     // Handle the error (e.g., display an error message)
+                 }
+             }
+         }
+     }
   
   
   
