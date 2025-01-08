@@ -21,7 +21,7 @@ class TodoStore: ObservableObject {
         }
     }
 
-  
+  @MainActor 
   func createTodo(title: String, isCompleted: Bool, dueDate: Date, priority: Int) async {
           do {
               let newTodo = try await apiClient.createTodo(title: title, isCompleted: isCompleted, dueDate: dueDate, priority: priority)
