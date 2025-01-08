@@ -32,23 +32,25 @@ struct ContentView: View {
                 .onDelete(perform: todoStore.deleteTodo)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+              ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+              }
+              ToolbarItem {
+                NavigationLink(destination: AddTodoView(todoStore: todoStore)) {
+                  Label("Add Item", systemImage: "plus")
                 }
-                ToolbarItem {
-                  NavigationLink(destination: AddTodoView(todoStore: todoStore)) {
-                    Label("Add Item", systemImage: "plus")
-                  }
-                  
-                  
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-                  
-                  
-                  
-                }
-            }
+                
+                
+                //                    Button(action: addItem) {
+                //                        Label("Add Item", systemImage: "plus")
+                //                    }
+                
+                
+                
+              }
+            }.task {
+              await todoStore.fetchTodos() // Fetch todos on appear
+          }
         
     }
 
