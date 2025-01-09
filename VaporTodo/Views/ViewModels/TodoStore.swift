@@ -29,23 +29,19 @@ class TodoStore: ObservableObject {
               todos.append(newTodo)
           } catch {
               print("Error creating todo: \(error)")
-              // Handle the error (e.g., display an error message)
           }
       }
   
-  
+  @MainActor
   func deleteTodo(at offsets: IndexSet) {
          for index in offsets {
              let todoToDelete = todos[index]
              Task {
                  do {
                      try await apiClient.deleteTodo(withID: todoToDelete.id) // Call the delete API
-                     await MainActor.run { // Update the UI on the main thread
                          todos.remove(at: index)
-                     }
                  } catch {
                      print("Error deleting todo: \(error)")
-                     // Handle the error (e.g., display an error message)
                  }
              }
          }

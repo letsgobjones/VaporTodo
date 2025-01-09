@@ -66,14 +66,6 @@ struct APIClient {
           return try JSONDecoder().decode(TodoItem.self, from: data)
       }
   
-  
-  
-  
-  
-  
-  
-  
-
   func deleteTodo(withID id: UUID) async throws {
           guard let url = URL(string: "todos/\(id)", relativeTo: baseURL) else {
               throw APIError.invalidURL

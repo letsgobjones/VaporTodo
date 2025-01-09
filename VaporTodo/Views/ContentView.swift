@@ -39,14 +39,6 @@ struct ContentView: View {
                 NavigationLink(destination: AddTodoView(todoStore: todoStore)) {
                   Label("Add Item", systemImage: "plus")
                 }
-                
-                
-                //                    Button(action: addItem) {
-                //                        Label("Add Item", systemImage: "plus")
-                //                    }
-                
-                
-                
               }
             }.task {
               await todoStore.fetchTodos() // Fetch todos on appear
@@ -65,21 +57,3 @@ struct ContentView: View {
 //  .modelContainer(PreviewContainer.shared)
   
 }
-
-
-//extension ContentView {
-//  private func addItem() {
-//      withAnimation {
-//        let newItem = TodoItem(title: title, isCompleted: isCompleted, dueDate: dueDate, priority: priority,timestamp: Date())
-//          modelContext.insert(newItem)
-//      }
-//  }
-//
-//  private func deleteItems(offsets: IndexSet) {
-//      withAnimation {
-//          for index in offsets {
-//              modelContext.delete(todo[index])
-//          }
-//      }
-//  }
-//}
